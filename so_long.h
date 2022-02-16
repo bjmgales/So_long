@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgales <bgales@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bjm <bjm@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 22:52:16 by bgales            #+#    #+#             */
-/*   Updated: 2022/02/16 13:05:19 by bgales           ###   ########.fr       */
+/*   Updated: 2022/02/16 13:36:07 by bjm              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ struct images
 {
 	void * img_ptr;
 	void * map_ptr;
-}
-typedef struct images images
+};
+typedef struct images images;
 
 struct void_bag_2
 {
@@ -45,6 +45,6 @@ struct int_bag_4
 typedef struct int_bag_4 int_bag_4;
 
 
-void	so_long(void_bag_2 *software, int_bag_4 *coordinates);
+void	so_long(const char *map);
 
 # endif
