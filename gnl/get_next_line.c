@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjm <bjm@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bgales <bgales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:22:34 by bjm               #+#    #+#             */
-/*   Updated: 2022/02/08 17:03:25 by bjm              ###   ########.fr       */
+/*   Updated: 2022/02/16 13:05:19 by bgales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	*ft_get_new_line(int fd)
 {
 	int			i;
+	int BUFFER_SIZE = 1;
 	char		buffer[BUFFER_SIZE + 1];
 	char		*newline;
 
