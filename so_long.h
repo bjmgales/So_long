@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjm <bjm@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bgales <bgales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 22:52:16 by bgales            #+#    #+#             */
-/*   Updated: 2022/02/16 13:36:07 by bjm              ###   ########.fr       */
+/*   Updated: 2022/02/16 21:25:31 by bgales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ struct int_bag_4
 {
 	int *x;
 	int	*y;
-	int *full_width;
-	int *full_height;
+	int full_width;
+	int full_height;
 };
 typedef struct int_bag_4 int_bag_4;
 
-
+int_bag_4 *map_init(const char *map);
+int mapcheck(char **map, int_bag_4 *coordinates);
 void	so_long(const char *map);
 
 # endif

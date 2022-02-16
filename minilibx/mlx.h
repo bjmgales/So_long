@@ -1,9 +1,9 @@
 /*
-** mlx.h for MinilibX in 
-** 
+** mlx.h for MinilibX in
+**
 ** Made by Charlie Root
 ** Login   <ol@staff.42.fr>
-** 
+**
 ** Started on  Mon Jul 31 16:37:50 2000 Charlie Root
 ** Last update Tue Oct 01 16:23:28 2014 Olivier Crouzet
 */
@@ -32,7 +32,7 @@
 ** Il y a des differences entre X11 et MacOS.
 ** les numeros des touches ne sont pas les memes,
 ** les numeros des boutons souris ne sont pas les memes.
-** Egalement l'expose est gere differemment, et sous MacOS
+** Egalement l'expose est gere differemment, et sous M
 ** il est preferable d'entrer le plus tot possible dans mlx_loop,
 ** il est normal que les fenetres n'apparaissent pas avant mlx_loop
 ** (ou bien forcez avec mlx_do_sync mais c'est pas genial).

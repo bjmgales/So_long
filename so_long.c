@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjm <bjm@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bgales <bgales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 22:52:09 by bgales            #+#    #+#             */
-/*   Updated: 2022/02/16 15:13:26 by bjm              ###   ########.fr       */
+/*   Updated: 2022/02/16 21:53:37 by bgales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,89 @@
 int	keycode(int key, void_bag_2 *software)
 {
 	printf(" Pressed key id : %d\n", key);
-	return (0)
+	return (0);
 }
 
-int_bag_4 *mapcheck_height(const char *map)
+int mapcheck(char **map, int_bag_4 *coordinates)
+{
+	int	i;
+	int	j;
+	char *PIE_check=NULL;
+
+	i = 0;
+	j = ft_strlen(map[i]) - 2;
+	while (map[i] != NULL)
+	{
+		if (map[i][0] != '1' || map[i][j] != '1')
+		{
+			free (coordinates);
+			printf("Error \n Map is not surrounded by walls");
+			return (1);
+		}
+		if (ft_strlen(map[i]) != (j + 2))
+		{
+			printf("Eroor\n Map is not a rectangle");
+			free(coordinates);
+			return (1);
+		}
+		i++;
+	}
+	i--;
+	j = 0;
+	if (map[2] == NULL || ft_strlen(map[i]) < 3)
+	{
+		free(coordinates);
+		printf("Error\n Map is too small");
+		return (1);
+	}
+	while (map[0][j] < (ft_strlen(map[0]) - 2) && map[i][j] < (ft_strlen(map[0]) - 2))
+	{
+		if (map[0][j] != '1' || map[i][j] != '1' )
+		{
+			free (coordinates);
+			printf("Error \n Map is not surrounded by walls");
+			return (1);
+		}
+		j++;
+	}
+	i = -1;
+	while (map[++i] != NULL)
+		PIE_check = ft_strjoin(PIE_check, map[i]);
+	if (!ft_strchr(PIE_check, 'P') || !ft_strchr(PIE_check, 'I') || !ft_strchr(PIE_check, 'E'))
+	{
+		free(coordinates);
+		printf("Error\n Map is missing elements");
+		return (1);
+	}
+	return (0);
+}
+
+int_bag_4 *map_init(const char *map)
 {
 	int	fd;
-	char **tocheck;
-	int_bag_4 *coordinates=NULL;
+	char *tocheck[21];
+	int_bag_4 *coordinates;
 	int y;
 	int x;
-	
+
 	y = 0;
 	x = 0;
 	fd = open(map, O_RDONLY);
-	while (x < 30)
-	{
+	coordinates = malloc(sizeof(int_bag_4));
+	while (x < 21)
 		tocheck[x++] = get_next_line(fd);
-	}
 	close(fd);
-	if (tocheck[20] != NULL || tocheck[])
-	{
-		printf("ERROR : map is too big\n");
-		exit(0);
-	}
 	x = ft_strlen(tocheck[0]);
-	while (tocheck[++y] != NULL)
+	if (mapcheck(tocheck, coordinates) == 1)
 	{
-		if (x != ft_strlen(tocheck[y]))
-		{
-			printf("ERROR : map is not a rectangle.\n");
-			exit(0);
-		}
-		free(tocheck[y]);
+		while (tocheck[y] != NULL)
+			free(tocheck[y++]);
+		return (NULL);
 	}
-	coordinates=malloc(sizeof(int_bag_4));
-	*coordinates->full_width = x - 1;
-	*coordinates->full_height = y - 1;
-
+	while (tocheck[y] != NULL)
+		free(tocheck[y++]);
+	coordinates->full_width = x - 1;
+	coordinates->full_height = y;
 	return (coordinates);
 }
 void so_long(const char *map)
@@ -63,11 +108,9 @@ void so_long(const char *map)
 
 	software = malloc(sizeof(void_bag_2));
 	image = malloc(sizeof(images));
-	coordinates = mapcheck_height(map);
-	if (i == 0)
-		return;
+	coordinates = map_init(map);
 	software->game_ptr = mlx_init();
-	software->win_ptr = mlx_new_window(software->game_ptr, (*coordinates->full_width * 10), (*coordinates->full_height * 40), "test");
+	software->win_ptr = mlx_new_window(software->game_ptr, (coordinates->full_width * 40), (coordinates->full_height * 40), "test");
 	mlx_loop(software->game_ptr);
 }
 
