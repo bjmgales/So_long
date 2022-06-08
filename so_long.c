@@ -5,116 +5,111 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgales <bgales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 22:52:09 by bgales            #+#    #+#             */
-/*   Updated: 2022/02/16 21:53:37 by bgales           ###   ########.fr       */
+/*   Created: 2022/05/18 10:53:29 by bgales            #+#    #+#             */
+/*   Updated: 2022/06/02 14:25:46 by bgales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	keycode(int key, void_bag_2 *software)
+char	**get_map(const char *map_path, t_game *game_ptr)
 {
-	printf(" Pressed key id : %d\n", key);
-	return (0);
+	int		fd;
+	int		line;
+	char	**ret;
+
+	line = get_y(map_path);
+	ret = NULL;
+	if (open(map_path, O_DIRECTORY) > 0)
+		print_and_exit("Error\n file is needed.");
+	fd = open(map_path, O_RDONLY);
+	if (fd == -1)
+		print_and_exit("Error\n Map file not found.");
+	game_ptr->map_h = -1;
+	while (++game_ptr->map_h < line)
+	{
+		game_ptr->map[game_ptr->map_h] = get_next_line(fd);
+		del_nl(game_ptr->map[game_ptr->map_h]);
+	}
+	game_ptr->map_w = ft_strlen(game_ptr->map[0]);
+	return (ret);
 }
 
-int mapcheck(char **map, int_bag_4 *coordinates)
+void	load_texture(t_game *game_ptr)
 {
+	game_ptr->exit = mlx_xpm_file_to_image(game_ptr->soft,
+			"./image/exit.xpm", &game_ptr->height, &game_ptr->width);
+	game_ptr->item = mlx_xpm_file_to_image(game_ptr->soft,
+			"./image/item.xpm", &game_ptr->height, &game_ptr->width);
+	game_ptr->p = mlx_xpm_file_to_image(game_ptr->soft,
+			"./image/player.xpm", &game_ptr->height, &game_ptr->width);
+	game_ptr->wall = mlx_xpm_file_to_image(game_ptr->soft,
+			"./image/wall.xpm", &game_ptr->height, &game_ptr->width);
+	game_ptr->floor = mlx_xpm_file_to_image(game_ptr->soft,
+			"./image/floor.xpm", &game_ptr->height, &game_ptr->width);
+}
+
+int	item_nb(t_game *game_ptr)
+{
+	int	l;
 	int	i;
-	int	j;
-	char *PIE_check=NULL;
+	int	ret;
 
+	l = 0;
 	i = 0;
-	j = ft_strlen(map[i]) - 2;
-	while (map[i] != NULL)
+	ret = 0;
+	while (l < game_ptr->map_h)
 	{
-		if (map[i][0] != '1' || map[i][j] != '1')
+		while (game_ptr->map[l][i])
 		{
-			free (coordinates);
-			printf("Error \n Map is not surrounded by walls");
-			return (1);
+			if (game_ptr->map[l][i] == 'C')
+				ret++;
+			i++;
 		}
-		if (ft_strlen(map[i]) != (j + 2))
-		{
-			printf("Eroor\n Map is not a rectangle");
-			free(coordinates);
-			return (1);
-		}
-		i++;
+		i = 0;
+		l++;
 	}
-	i--;
-	j = 0;
-	if (map[2] == NULL || ft_strlen(map[i]) < 3)
+	return (ret);
+}
+
+int	move_player(int key, t_game *g)
+{
+	int		l;
+	int		i;
+
+	l = 0;
+	i = 0;
+	if (key == 2)
+		return (move_right(g, key));
+	if (key == 0)
+		return (move_left(g, key));
+	if (key == 1)
+		return (move_down(g, key));
+	if (key == 13)
+		return (move_up(g, key));
+	if (key == 53)
 	{
-		free(coordinates);
-		printf("Error\n Map is too small");
-		return (1);
-	}
-	while (map[0][j] < (ft_strlen(map[0]) - 2) && map[i][j] < (ft_strlen(map[0]) - 2))
-	{
-		if (map[0][j] != '1' || map[i][j] != '1' )
-		{
-			free (coordinates);
-			printf("Error \n Map is not surrounded by walls");
-			return (1);
-		}
-		j++;
-	}
-	i = -1;
-	while (map[++i] != NULL)
-		PIE_check = ft_strjoin(PIE_check, map[i]);
-	if (!ft_strchr(PIE_check, 'P') || !ft_strchr(PIE_check, 'I') || !ft_strchr(PIE_check, 'E'))
-	{
-		free(coordinates);
-		printf("Error\n Map is missing elements");
-		return (1);
+		mlx_destroy_window(g->soft, g->win);
+		print_and_exit("Goodbye thanks for playing \n");
 	}
 	return (0);
 }
 
-int_bag_4 *map_init(const char *map)
+void	so_long(const char *map_path)
 {
-	int	fd;
-	char *tocheck[21];
-	int_bag_4 *coordinates;
-	int y;
-	int x;
+	t_game	game_ptr;
 
-	y = 0;
-	x = 0;
-	fd = open(map, O_RDONLY);
-	coordinates = malloc(sizeof(int_bag_4));
-	while (x < 21)
-		tocheck[x++] = get_next_line(fd);
-	close(fd);
-	x = ft_strlen(tocheck[0]);
-	if (mapcheck(tocheck, coordinates) == 1)
-	{
-		while (tocheck[y] != NULL)
-			free(tocheck[y++]);
-		return (NULL);
-	}
-	while (tocheck[y] != NULL)
-		free(tocheck[y++]);
-	coordinates->full_width = x - 1;
-	coordinates->full_height = y;
-	return (coordinates);
-}
-void so_long(const char *map)
-{
-	void_bag_2	*software;
-	int_bag_4	*coordinates;
-	images		*image;
-
-	software = malloc(sizeof(void_bag_2));
-	image = malloc(sizeof(images));
-	coordinates = map_init(map);
-	software->game_ptr = mlx_init();
-	software->win_ptr = mlx_new_window(software->game_ptr, (coordinates->full_width * 40), (coordinates->full_height * 40), "test");
-	mlx_loop(software->game_ptr);
-}
-
-int main(void)
-{
-	so_long("./maps/test.ber");
+	get_map(map_path, &game_ptr);
+	game_ptr.soft = mlx_init();
+	check_map(&game_ptr);
+	load_texture(&game_ptr);
+	game_ptr.win = mlx_new_window(game_ptr.soft, game_ptr.map_w * 32,
+			game_ptr.map_h * 32, "So_long");
+	print_map(game_ptr);
+	game_ptr.c_nbr = item_nb(&game_ptr);
+	game_ptr.c_mv = 0;
+	mlx_hook(game_ptr.win, 02, 0L, move_player, &game_ptr);
+	mlx_hook(game_ptr.win, 17, 0, endgame, &game_ptr);
+	mlx_loop(game_ptr.soft);
+	return ;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjm <bjm@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bgales <bgales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 14:13:33 by bjm               #+#    #+#             */
-/*   Updated: 2022/02/08 17:16:59 by bjm              ###   ########.fr       */
+/*   Updated: 2022/05/18 14:46:56 by bgales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_strdup(char *s1)
 		return (ft_strdup(""));
 	ret = malloc(sizeof(char) * (ft_strlen(s1) + 1));
 	if (s1)
-		while (s1[++i])
+		while (s1[++i] || s1[i] == '\n')
 			ret[i] = s1[i];
 	ret[i] = '\0';
 	return (ret);

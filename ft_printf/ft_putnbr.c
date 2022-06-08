@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjm <bjm@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bgales <bgales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/14 09:30:40 by bjm               #+#    #+#             */
-/*   Updated: 2022/02/14 10:15:44 by bjm              ###   ########.fr       */
+/*   Created: 2021/11/13 23:08:15 by bgales            #+#    #+#             */
+/*   Updated: 2021/11/14 00:53:53 by bgales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "ft_printf.h"
 
-void	ft_putnbr(int c)
+void	ft_putnbr(unsigned int toconvert, unsigned int *counter)
 {
-	char *set;
+	char	*set;
 
 	set = "0123456789";
-
-	if (c < 0)
+	if (toconvert > 9)
 	{
-		write(1, "-", 1);
-		c *= -1;
+		ft_putnbr((toconvert / 10), counter);
+		ft_putnbr((toconvert % 10), counter);
 	}
-
-	if (c > 9)
+	else
 	{
-		ft_putnbr(c / 10);
-		ft_putnbr(c % 10);
+		*counter += write(1, &set[toconvert], 1);
 	}
-	if (c < 9)
-		write(1, &set[c], 1);
-	return;
+	return ;
 }
