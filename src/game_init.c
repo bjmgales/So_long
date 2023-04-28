@@ -6,7 +6,7 @@
 /*   By: bgales <bgales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:53:29 by bgales            #+#    #+#             */
-/*   Updated: 2022/06/02 14:25:46 by bgales           ###   ########.fr       */
+/*   Updated: 2023/04/28 18:10:27 by bgales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ char	**get_map(const char *map_path, t_game *game_ptr)
 void	load_texture(t_game *game_ptr)
 {
 	game_ptr->exit = mlx_xpm_file_to_image(game_ptr->soft,
-			"./image/exit.xpm", &game_ptr->height, &game_ptr->width);
+			"./ressources/image/exit.xpm", &game_ptr->height, &game_ptr->width);
 	game_ptr->item = mlx_xpm_file_to_image(game_ptr->soft,
-			"./image/item.xpm", &game_ptr->height, &game_ptr->width);
+			"./ressources/image/item.xpm", &game_ptr->height, &game_ptr->width);
 	game_ptr->p = mlx_xpm_file_to_image(game_ptr->soft,
-			"./image/player.xpm", &game_ptr->height, &game_ptr->width);
+			"./ressources/image/player.xpm", &game_ptr->height, &game_ptr->width);
 	game_ptr->wall = mlx_xpm_file_to_image(game_ptr->soft,
-			"./image/wall.xpm", &game_ptr->height, &game_ptr->width);
+			"./ressources//image/wall.xpm", &game_ptr->height, &game_ptr->width);
 	game_ptr->floor = mlx_xpm_file_to_image(game_ptr->soft,
-			"./image/floor.xpm", &game_ptr->height, &game_ptr->width);
+			"./ressources/image/floor.xpm", &game_ptr->height, &game_ptr->width);
 }
 
 int	item_nb(t_game *game_ptr)

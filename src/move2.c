@@ -6,11 +6,12 @@
 /*   By: bgales <bgales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 16:05:59 by bgales            #+#    #+#             */
-/*   Updated: 2022/06/02 14:12:12 by bgales           ###   ########.fr       */
+/*   Updated: 2023/04/28 18:57:45 by bgales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "ft_printf.h"
 
 void	print_move(int key, t_game *g)
 {
