@@ -11,10 +11,10 @@ itch.io
 In any case, try to respect other people’s work.
 | Program name | `so_long` |
 |:--- |:--- |
-| **Turn in files** | `• open, close, read, write, malloc, free, perror,strerror, exit. All functions of the mathlibrary (-lm compiler option,man man 3 math). All functions of the MiniLibX ft_printf and any equivalent YOU coded` |
-| **Return value** | `Read line: correct behavior  NULL: there is nothing else to read, or an error occurred` |
-| **External functions** | `read, malloc, free` |
-| **Libft** | `YES` |
+| **Turn in files** | `Makefile, *.h, *.c, maps, textures` |
+| **Arguments** | `A map in format *.ber` |
+| **External functions** | `open, close, read, write, malloc, free, perror,strerror, exit. All functions of the mathlibrary (-lm compiler option,man man 3 math). All functions of the MiniLibX ft_printf and any equivalent YOU coded` |
+| **Libft authorized** | `Yes` |
 | **Description** | `You must create a basic 2D game in which a dolphin escapes Earth after eating some fish. Instead of a dolphin, fish, and the Earth, you can use any character, any collectible and any place you want.` |
 
 ## Common instructions 
