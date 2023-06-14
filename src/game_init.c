@@ -44,7 +44,7 @@ void	load_texture(t_game *game_ptr)
 	game_ptr->p = mlx_xpm_file_to_image(game_ptr->soft,
 			"./ressources/image/player.xpm", &game_ptr->height, &game_ptr->width);
 	game_ptr->wall = mlx_xpm_file_to_image(game_ptr->soft,
-			"./ressources//image/wall.xpm", &game_ptr->height, &game_ptr->width);
+			"./ressources/image/wall.xpm", &game_ptr->height, &game_ptr->width);
 	game_ptr->floor = mlx_xpm_file_to_image(game_ptr->soft,
 			"./ressources/image/floor.xpm", &game_ptr->height, &game_ptr->width);
 }
