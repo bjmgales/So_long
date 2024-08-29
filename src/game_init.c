@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgales <bgales@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gales <gales@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:53:29 by bgales            #+#    #+#             */
-/*   Updated: 2023/04/28 18:10:27 by bgales           ###   ########.fr       */
+/*   Updated: 2024/08/29 22:04:41 by gales            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	**get_map(const char *map_path, t_game *game_ptr)
 
 	line = get_y(map_path);
 	ret = NULL;
+	game_ptr->map = malloc((line + 1) * sizeof(char *));
 	if (open(map_path, O_DIRECTORY) > 0)
 		print_and_exit("Error\n file is needed.");
 	fd = open(map_path, O_RDONLY);
@@ -45,7 +46,7 @@ void	load_texture(t_game *game_ptr)
 			"./ressources/image/player.xpm", &game_ptr->height, &game_ptr->width);
 	game_ptr->wall = mlx_xpm_file_to_image(game_ptr->soft,
 			"./ressources/image/wall.xpm", &game_ptr->height, &game_ptr->width);
-	game_ptr->floor = mlx_xpm_file_to_image(game_ptr->soft,
+game_ptr->floor = mlx_xpm_file_to_image(game_ptr->soft,
 			"./ressources/image/floor.xpm", &game_ptr->height, &game_ptr->width);
 }
 
@@ -74,11 +75,6 @@ int	item_nb(t_game *game_ptr)
 
 int	move_player(int key, t_game *g)
 {
-	int		l;
-	int		i;
-
-	l = 0;
-	i = 0;
 	if (key == 2)
 		return (move_right(g, key));
 	if (key == 0)

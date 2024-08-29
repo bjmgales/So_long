@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgales <bgales@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gales <gales@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:53:59 by bgales            #+#    #+#             */
-/*   Updated: 2023/04/28 19:17:23 by bgales           ###   ########.fr       */
+/*   Updated: 2024/08/29 21:52:17 by gales            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "get_next_line.h"
-# include <mlx.h>
+# include "../minilibx_opengl_20191021/mlx.h"
 # include "ft_printf.h"
 
 typedef struct s_chars {

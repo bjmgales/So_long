@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bgales <bgales@student.42.fr>              +#+  +:+       +#+         #
+#    By: gales <gales@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/30 14:23:25 by bgales            #+#    #+#              #
-#    Updated: 2023/04/28 18:20:02 by bgales           ###   ########.fr        #
+#    Updated: 2024/08/29 22:12:29 by gales            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,12 +55,13 @@ OBJS 				:=	$(addprefix $(OBJS_PATH)/, $(SRCS:$(SRCS_PATH)/%.c=%.o))
 # ********************************* H E A D S *********************************
 
 HFLAGS				:=	-I $(HDRS_PATH)\
-						-I $(LIBFT_PATH)/$(HDRS_PATH)
+						-I $(LIBFT_PATH)/$(HDRS_PATH)\
+						-I ./minilibx_opengl_20191021/
 
 # ********************************** L I B S **********************************
 
 # Libft
-FTFLAGS				:=
+FTFLAGS				:= -L ./minilibx_opengl_20191021/
 
 LFLAGS				:=	$(FTFLAGS) -lmlx -framework OpenGL -framework AppKit
 
